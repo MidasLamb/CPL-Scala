@@ -23,5 +23,6 @@ trait ImplicitRefs extends ExplicitRefs{
             case _ => super.valueOf(e, env)
         }
     }
-
 }
+
+object ImplicitRefs extends ImplicitRefs
