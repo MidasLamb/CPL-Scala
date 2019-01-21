@@ -17,12 +17,22 @@ trait ExplicitRefs extends Begin{
             storage.length - 1
         }
 
-        def deRef(ref: Ref): ExpVal = {
-            storage(ref)
+        def deRef(refVal: ExpVal): ExpVal = {
+            refVal match {
+                case RefVal(ref) => {
+                    storage(ref)
+                }
+                case _ => error("Not a RefVal")
+            }
         }
 
-        def setRef(ref: Ref, expr: ExpVal) = {
-            storage(ref) = expr
+        def setRef(refVal: ExpVal, expr: ExpVal) = {
+            refVal match {
+                case RefVal(ref) => {
+                    storage(ref) = expr
+                }
+                case _ => error("Not a RefVal")
+            }
         }
     }
 
@@ -47,22 +57,12 @@ trait ExplicitRefs extends Begin{
             }
             case DeRefExp(expr) => {
                 val ref = valueOf(expr, env)
-                ref match {
-                    case RefVal(ref) => {
-                        Store.deRef(ref)
-                    }
-                    case _ => error("Not a ref value")
-                }
+                Store.deRef(ref)
             }
             case SetRefExp(expr1, expr2) => {
                 val ref = valueOf(expr1, env)
-                ref match {
-                    case RefVal(ref) => {
-                        Store.setRef(ref, valueOf(expr2, env))
-                        NumVal(23) // Completely arbitrary number.
-                    }
-                    case _ => error("Not a ref value")
-                }
+                Store.setRef(ref, valueOf(expr2, env))
+                NumVal(23) // Completely arbitrary number.
             }
             case _ => super.valueOf(e, env)
         }
