@@ -19,14 +19,6 @@ class MultiDeclarationLetRecTest extends FlatSpec {
                 ConstExp(0),
                 CallExp(VarExp('even), DiffExp(VarExp('x), ConstExp(1)))
             )
-        val p1 = Program(
-            LetRecExp(
-                List('even, 'odd),
-                List('x, 'x),
-                List(even, odd),
-                CallExp(VarExp('even), ConstExp(13))
-            )
-        )
 
         def evenOddGenerator(evenOrOdd: Symbol, x: Int):Program = {
             Program(
@@ -37,7 +29,6 @@ class MultiDeclarationLetRecTest extends FlatSpec {
                     CallExp(VarExp(evenOrOdd), ConstExp(x))
                 )
             )
-
         }
 
         val result0 = MultiDeclarationLetRec.valueOf(evenOddGenerator('even, 2))
