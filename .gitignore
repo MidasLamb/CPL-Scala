@@ -1,0 +1,9 @@
+# Scala
+target
+*.class
+# Intellij
+*.iml
+*.ipr
+*.iws
+.idea
+out
