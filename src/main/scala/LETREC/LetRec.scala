@@ -1,6 +1,6 @@
 package LETREC
 
-import LET.Expression
+import LET.{Expression, Let}
 import LETREC._
 import PROC._
 
@@ -13,7 +13,7 @@ import PROC._
   * We allow recursion by delaying the creation of the ProcVal until we search through the environment, allowing
   * the ProcVal to have an environment with itself in it.
   */
-class LetRec extends Proc {
+trait LetRec extends Proc with Let {
     override def valueOf(e: Expression, env: Environment): ExpVal = {
         e match {
             case LetRecExp(procName, boundVar, procBody, letrecBody) => {

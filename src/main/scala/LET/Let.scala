@@ -1,7 +1,7 @@
 package LET
 import util.Util._
 
-class Let {
+trait Let {
 
     abstract class ExpVal {
         def toNum: Int

@@ -5,7 +5,7 @@ import util.Util._
 /**
   * Creates a ProcVal with a closure, meaning the environment on creation is captured. Some languages, such as JS don't always have this.
   */
-class Proc extends Let{
+trait Proc extends Let{
 
     case class ProcVal(variable: Symbol, body: Expression, env: Environment) extends ExpVal {
         override def toNum: Int = ???
